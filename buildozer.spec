@@ -69,7 +69,7 @@ android.ndk = 25b
 # android.skip_update = False
 
 # (bool) If True, then automatically accept SDK license
-# android.accept_sdk_license = True
+android.accept_sdk_license = True
 
 # (str) The Android Arch to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
 android.archs = arm64-v8a, armeabi-v7a
