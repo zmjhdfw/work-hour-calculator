@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}查看记录 - 工时计算器{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>📋 所有工时记录</h2>
+    {% if records %}
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>日期</th>
+                <th>时间</th>
+                <th>工时</th>
+                <th>项目</th>
+                <th>描述</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <td>{{ record.id }}</td>
+                <td>{{ record.date.strftime('%Y-%m-%d') }}</td>
+                <td>{{ record.start_time.strftime('%H:%M') }}-{{ record.end_time.strftime('%H:%M') }}</td>
+                <td>{{ "%.2f"|format(record.duration_hours) }}h</td>
+                <td>{{ record.project }}</td>
+                <td>{{ record.description[:20] }}{% if record.description|length > 20 %}...{% endif %}</td>
+                <td>
+                    <a href="/edit/{{ record.id }}" class="btn" style="padding: 5px 10px; font-size: 0.9em;">编辑</a>
+                    <form method="POST" action="/delete/{{ record.id }}" style="display: inline;" onsubmit="return confirm('确定删除？')">
+                        <button type="submit" class="btn btn-danger" style="padding: 5px 10px; font-size: 0.9em;">删除</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="/export" class="btn" id="exportBtn">📥 导出CSV</a>
+    </div>
+    {% else %}
+    <p style="text-align: center; color: #999; padding: 40px;">暂无记录</p>
+    <div style="text-align: center;">
+        <a href="/add" class="btn">添加第一条记录</a>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+document.getElementById('exportBtn')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    fetch('/export')
+        .then(response => response.json())
+        .then(data => {
+            const blob = new Blob([data.data], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = data.filename;
+            link.click();
+        });
+});
+</script>
+{% endblock %}

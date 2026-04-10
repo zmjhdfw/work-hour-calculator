@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}编辑记录 - 工时计算器{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>✏️ 编辑工时记录</h2>
+    <form method="POST" action="/edit/{{ record.id }}">
+        <div class="form-group">
+            <label for="date">日期</label>
+            <input type="date" id="date" name="date" value="{{ record.date.strftime('%Y-%m-%d') }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="start_time">开始时间</label>
+            <input type="time" id="start_time" name="start_time" value="{{ record.start_time.strftime('%H:%M') }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="end_time">结束时间</label>
+            <input type="time" id="end_time" name="end_time" value="{{ record.end_time.strftime('%H:%M') }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="project">项目名称</label>
+            <input type="text" id="project" name="project" value="{{ record.project }}" list="project-list" required>
+            {% if projects %}
+            <datalist id="project-list">
+                {% for project in projects %}
+                <option value="{{ project }}">
+                {% endfor %}
+            </datalist>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label for="description">工作描述</label>
+            <textarea id="description" name="description" rows="3">{{ record.description }}</textarea>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <button type="submit" class="btn" style="font-size: 1.1em;">✅ 保存修改</button>
+            <a href="/records" class="btn" style="background: #6c757d;">取消</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

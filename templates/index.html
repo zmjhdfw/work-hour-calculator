@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>📊 今日概览</h2>
+    <div class="stats-grid">
+        <div class="stat-item">
+            <div class="stat-value">{{ "%.2f"|format(today_hours) }}</div>
+            <div class="stat-label">今日工时 (小时)</div>
+        </div>
+        {% if week_stats %}
+        <div class="stat-item">
+            <div class="stat-value">{{ "%.2f"|format(week_stats.total_hours) }}</div>
+            <div class="stat-label">本周工时 (小时)</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">{{ week_stats.work_days }}</div>
+            <div class="stat-label">本周工作天数</div>
+        </div>
+        {% else %}
+        <div class="stat-item">
+            <div class="stat-value">0</div>
+            <div class="stat-label">本周工时 (小时)</div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="card">
+    <h2>📝 最近记录</h2>
+    {% if records %}
+    <table>
+        <thead>
+            <tr>
+                <th>日期</th>
+                <th>时间</th>
+                <th>工时</th>
+                <th>项目</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <td>{{ record.date.strftime('%m-%d') }}</td>
+                <td>{{ record.start_time.strftime('%H:%M') }}-{{ record.end_time.strftime('%H:%M') }}</td>
+                <td>{{ "%.2f"|format(record.duration_hours) }}h</td>
+                <td>{{ record.project }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/records" class="btn">查看全部记录</a>
+    {% else %}
+    <p style="text-align: center; color: #999; padding: 20px;">暂无记录，<a href="/add">立即添加</a></p>
+    {% endif %}
+</div>
+
+{% if projects %}
+<div class="card">
+    <h2>📁 项目列表</h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        {% for project in projects %}
+        <span style="background: #667eea; color: white; padding: 8px 15px; border-radius: 20px;">{{ project }}</span>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<div style="text-align: center; margin-top: 30px;">
+    <a href="/add" class="btn" style="font-size: 1.2em; padding: 15px 30px;">➕ 添加工时记录</a>
+</div>
+{% endblock %}

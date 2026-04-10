@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}统计分析 - 工时计算器{% endblock %}
+
+{% block content %}
+{% if stats %}
+<div class="card">
+    <h2>📊 工时统计</h2>
+    <div class="stats-grid">
+        <div class="stat-item">
+            <div class="stat-value">{{ "%.2f"|format(stats.total_hours) }}</div>
+            <div class="stat-label">总工时 (小时)</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">{{ "%.2f"|format(stats.normal_hours) }}</div>
+            <div class="stat-label">正常工时 (小时)</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">{{ "%.2f"|format(stats.overtime_hours) }}</div>
+            <div class="stat-label">加班工时 (小时)</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">{{ stats.work_days }}</div>
+            <div class="stat-label">工作天数</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">{{ "%.2f"|format(stats.avg_hours_per_day) }}</div>
+            <div class="stat-label">日均工时 (小时)</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">{{ total_records }}</div>
+            <div class="stat-label">总记录数</div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>📁 项目工时分布</h2>
+    {% if project_stats %}
+    {% for project, hours in project_stats.items() %}
+    <div style="margin: 15px 0;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+            <span><strong>{{ project }}</strong></span>
+            <span>{{ "%.2f"|format(hours) }}h ({{ "%.1f"|format(hours / stats.total_hours * 100) }}%)</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: {{ hours / stats.total_hours * 100 }}%;"></div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p style="text-align: center; color: #999;">暂无项目数据</p>
+    {% endif %}
+</div>
+{% else %}
+<div class="card">
+    <p style="text-align: center; color: #999; padding: 40px;">暂无统计数据，请先添加工时记录</p>
+    <div style="text-align: center;">
+        <a href="/add" class="btn">添加记录</a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

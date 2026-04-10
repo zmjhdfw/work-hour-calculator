@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}添加记录 - 工时计算器{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>➕ 添加工时记录</h2>
+    <form method="POST" action="/add">
+        <div class="form-group">
+            <label for="date">日期</label>
+            <input type="date" id="date" name="date" value="{{ today }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="start_time">开始时间</label>
+            <input type="time" id="start_time" name="start_time" value="09:00" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="end_time">结束时间</label>
+            <input type="time" id="end_time" name="end_time" value="17:00" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="project">项目名称</label>
+            {% if projects %}
+            <input type="text" id="project" name="project" list="project-list" placeholder="输入或选择项目" required>
+            <datalist id="project-list">
+                {% for project in projects %}
+                <option value="{{ project }}">
+                {% endfor %}
+            </datalist>
+            {% else %}
+            <input type="text" id="project" name="project" placeholder="例如：项目A" required>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label for="description">工作描述（可选）</label>
+            <textarea id="description" name="description" rows="3" placeholder="描述工作内容..."></textarea>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <button type="submit" class="btn" style="font-size: 1.1em;">✅ 保存记录</button>
+            <a href="/" class="btn" style="background: #6c757d;">取消</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
