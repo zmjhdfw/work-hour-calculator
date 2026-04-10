@@ -1,0 +1,67 @@
+name: Build APK Direct
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          git zip unzip openjdk-17-jdk \
+          autoconf libtool pkg-config \
+          libncurses5-dev libncursesw5-dev \
+          libtinfo5 cmake libffi-dev \
+          libssl-dev automake build-essential \
+          lsb-release wget
+
+    - name: Install Buildozer
+      run: |
+        pip install --upgrade pip setuptools wheel
+        pip install cython buildozer
+
+    - name: Build APK
+      run: |
+        # 设置环境变量
+        export BUILDOZER_WARN_ON_ROOT=0
+        export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+        
+        # 运行buildozer
+        buildozer android debug 2>&1 | tee build.log || true
+        
+        # 检查是否生成了APK
+        if ls bin/*.apk 1> /dev/null 2>&1; then
+          echo "✅ APK构建成功！"
+          ls -lh bin/*.apk
+        else
+          echo "❌ APK构建失败"
+          echo "查看构建日志："
+          tail -100 build.log
+          exit 1
+        fi
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: work-hour-calculator-apk
+        path: bin/*.apk
+        retention-days: 30
+
+    - name: Upload Build Log
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-log
+        path: build.log
