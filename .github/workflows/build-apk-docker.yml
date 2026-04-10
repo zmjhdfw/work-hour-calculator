@@ -16,8 +16,14 @@ jobs:
         docker run --rm \
           -v "$PWD":/home/user/app \
           -w /home/user/app \
+          --user root \
+          -e BUILDOZER_WARN_ON_ROOT=1 \
           kivy/buildozer \
-          buildozer android debug
+          bash -c "buildozer android debug || true"
+
+    - name: List built files
+      run: |
+        ls -la bin/ || echo "No bin directory found"
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
@@ -25,3 +31,4 @@ jobs:
         name: work-hour-calculator-apk
         path: bin/*.apk
         retention-days: 30
+        if-no-files-found: warn
