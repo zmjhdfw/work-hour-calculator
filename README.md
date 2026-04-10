@@ -2,6 +2,23 @@
 
 一个简单易用的工时记录和统计工具，提供命令行界面、Web界面和Windows可执行文件。
 
+## 📥 快速获取
+
+### 方式1：直接下载exe文件（推荐）
+
+访问 [Releases](https://github.com/zmjhdfw/work-hour-calculator/releases) 页面下载最新的 `工时计算器.exe`，双击运行即可，无需安装Python。
+
+### 方式2：克隆仓库
+
+```bash
+git clone https://github.com/zmjhdfw/work-hour-calculator.git
+cd work-hour-calculator
+```
+
+### 方式3：下载ZIP
+
+点击页面右上角的 "Code" → "Download ZIP"
+
 ## 功能特性
 
 - ✅ 添加、查看、编辑、删除工时记录
