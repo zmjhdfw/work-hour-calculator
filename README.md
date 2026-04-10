@@ -1,6 +1,6 @@
 # Python 工时计算程序
 
-一个简单易用的命令行工时记录和统计工具。
+一个简单易用的工时记录和统计工具，提供命令行界面、Web界面和Windows可执行文件。
 
 ## 功能特性
 
@@ -10,6 +10,8 @@
 - ✅ 生成统计报告（摘要报告、项目报告、详细报告）
 - ✅ 导出数据为CSV格式
 - ✅ 支持中文界面
+- ✅ 提供Windows exe可执行文件
+- ✅ 提供移动端友好的Web界面
 
 ## 项目结构
 
@@ -31,11 +33,18 @@ work_hour_calculator/
 
 ## 安装和运行
 
-### 前置要求
+### 方式1：使用Windows可执行文件（推荐）
+
+1. 从 [Releases](../../releases) 页面下载最新的 `工时计算器.exe`
+2. 双击运行即可，无需安装Python
+
+### 方式2：使用Python源码
+
+#### 前置要求
 
 - Python 3.7 或更高版本
 
-### 运行程序
+#### 运行命令行版本
 
 ```bash
 python run.py
@@ -45,6 +54,18 @@ python run.py
 
 ```bash
 python -m work_hour_calculator.main
+```
+
+#### 运行Web版本（移动端友好）
+
+```bash
+# 安装Flask
+pip install flask
+
+# 运行Web服务器
+python web_app.py
+
+# 访问 http://localhost:5000
 ```
 
 ## 使用说明
