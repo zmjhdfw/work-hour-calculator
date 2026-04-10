@@ -1,0 +1,27 @@
+name: Build APK with Docker
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Build APK using Docker
+      run: |
+        docker run --rm \
+          -v "$PWD":/home/user/app \
+          -w /home/user/app \
+          kivy/buildozer \
+          buildozer android debug
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: work-hour-calculator-apk
+        path: bin/*.apk
+        retention-days: 30
