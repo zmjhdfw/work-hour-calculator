@@ -34,4 +34,7 @@ requires = []
 
 [tool.briefcase.app.workhourcalculator.android]
 requires = []
-build_gradle_dependencies = []
+build_gradle_dependencies = [
+    "implementation 'androidx.appcompat:appcompat:1.6.1'",
+    "implementation 'com.google.android.material:material:1.11.0'",
+]
