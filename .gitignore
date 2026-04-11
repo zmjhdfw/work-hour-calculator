@@ -6,7 +6,6 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
@@ -24,6 +23,8 @@ wheels/
 venv/
 ENV/
 env/
+.venv/
+.buildozer-venv/
 
 # IDE
 .vscode/
@@ -39,8 +40,27 @@ htmlcov/
 
 # Data files
 work_records.json
-*.json
 *.csv
+
+# Buildozer
+.buildozer/
+bin/
+
+# Briefcase
+briefcase_create.log
+
+# Logs
+*.log
+pip_install_log*.txt
+pip_step*.txt
+venv_list.txt
+wsl_check.txt
+build-log.zip
+build-log-extracted/
+
+# Temporary files
+nul
+*.tmp
 
 # OS
 .DS_Store

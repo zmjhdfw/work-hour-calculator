@@ -16,7 +16,7 @@ echo    - 不要勾选任何初始化选项
 echo.
 echo 2. 创建完成后，输入您的GitHub用户名：
 echo.
-set /p username="GitHub用户名: "
+set /p username="zmjhdfw"
 echo.
 echo 3. 添加远程仓库...
 git remote add origin https://github.com/%username%/work-hour-calculator.git
