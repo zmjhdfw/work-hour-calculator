@@ -1,17 +1,35 @@
+[build-system]
+requires = ["briefcase"]
+build-backend = "briefcase"
+
+[project]
+name = "workhourcalculator"
+version = "1.0.0"
+description = "Python工时计算程序 - 记录、计算和统计工作工时"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Work Hour Calculator Team", email = "workhour@example.com"}
+]
+
 [tool.briefcase]
 project_name = "工时计算器"
 bundle = "org.workhour"
-version = "1.0.0"
 url = "https://github.com/zmjhdfw/work-hour-calculator"
-license = "MIT license"
-author = "Work Hour Calculator Team"
-author_email = "workhour@example.com"
 
 [tool.briefcase.app.workhourcalculator]
 formal_name = "工时计算器"
 description = "Python工时计算程序 - 记录、计算和统计工作工时"
-icon = "resources/workhourcalculator"
-sources = ['app.py']
+long_description = """一个简单易用的工时记录和统计工具。
+
+功能特性：
+- 添加、查看、编辑、删除工时记录
+- 按日期、日期范围、项目查询记录
+- 计算工时统计（总工时、正常工时、加班工时）
+- 生成统计报告
+- 导出数据为CSV格式
+"""
+sources = ["src/workhourcalculator"]
 requires = []
 
 [tool.briefcase.app.workhourcalculator.android]
