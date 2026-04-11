@@ -2,6 +2,7 @@ name: Build APK with BeeWare
 
 on:
   push:
+    branches: [master]
     tags:
       - 'v*'
   workflow_dispatch:
@@ -9,6 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
 
     steps:
     - name: Checkout
@@ -22,28 +24,48 @@ jobs:
     - name: Install Java
       run: |
         sudo apt-get update
-        sudo apt-get install -y openjdk-11-jdk
+        sudo apt-get install -y openjdk-17-jdk
+        export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+        echo "JAVA_HOME=$JAVA_HOME" >> $GITHUB_ENV
 
     - name: Install Briefcase
       run: |
-        python -m pip install --upgrade pip
+        python -m pip install --upgrade pip setuptools wheel
         pip install briefcase
+        briefcase --version
 
     - name: Create Android Project
       run: |
-        briefcase create android
+        briefcase create android --no-input
+      continue-on-error: false
 
     - name: Build APK
       run: |
-        briefcase build android
+        briefcase build android --no-input
+      continue-on-error: false
 
-    - name: Find APK
+    - name: List APK files
       run: |
-        find android -name "*.apk" -type f
+        echo "Searching for APK files..."
+        find . -name "*.apk" -type f 2>/dev/null || echo "No APK found"
+        ls -la build/workhourcalculator/android/gradle/workhourcalculator/build/outputs/apk/ 2>/dev/null || echo "APK directory not found"
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: work-hour-calculator-apk
-        path: android/gradle/workhourcalculator/build/outputs/apk/**/*.apk
-        if-no-files-found: warn
+        path: |
+          build/workhourcalculator/android/gradle/workhourcalculator/build/outputs/apk/**/*.apk
+          **/*.apk
+        if-no-files-found: error
+        retention-days: 30
+
+    - name: Create Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          build/workhourcalculator/android/gradle/workhourcalculator/build/outputs/apk/**/*.apk
+          **/*.apk
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
