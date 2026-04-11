@@ -1,0 +1,19 @@
+[tool.briefcase]
+project_name = "工时计算器"
+bundle = "org.workhour"
+version = "1.0.0"
+url = "https://github.com/zmjhdfw/work-hour-calculator"
+license = "MIT license"
+author = "Work Hour Calculator Team"
+author_email = "workhour@example.com"
+
+[tool.briefcase.app.workhourcalculator]
+formal_name = "工时计算器"
+description = "Python工时计算程序 - 记录、计算和统计工作工时"
+icon = "resources/workhourcalculator"
+sources = ['app.py']
+requires = []
+
+[tool.briefcase.app.workhourcalculator.android]
+requires = []
+build_gradle_dependencies = []
