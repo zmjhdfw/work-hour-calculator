@@ -31,6 +31,20 @@
         android:layout_marginTop="16dp"/>
     
     <Button
+        android:id="@+id/btnClockIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="打卡"
+        android:layout_marginTop="8dp"/>
+    
+    <Button
+        android:id="@+id/btnCalendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="日历"
+        android:layout_marginTop="8dp"/>
+    
+    <Button
         android:id="@+id/btnView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

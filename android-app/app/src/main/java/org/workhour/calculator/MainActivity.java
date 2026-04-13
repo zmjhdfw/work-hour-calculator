@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         // 初始化视图
         tvRecordCount = findViewById(R.id.tvRecordCount);
         Button btnAdd = findViewById(R.id.btnAdd);
+        Button btnClockIn = findViewById(R.id.btnClockIn);
+        Button btnCalendar = findViewById(R.id.btnCalendar);
         Button btnView = findViewById(R.id.btnView);
         Button btnStats = findViewById(R.id.btnStats);
         Button btnClear = findViewById(R.id.btnClear);
@@ -32,6 +34,16 @@ public class MainActivity extends AppCompatActivity {
         // 设置按钮点击事件
         btnAdd.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AddRecordActivity.class);
+            startActivity(intent);
+        });
+        
+        btnClockIn.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ClockInActivity.class);
+            startActivity(intent);
+        });
+        
+        btnCalendar.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
             startActivity(intent);
         });
         

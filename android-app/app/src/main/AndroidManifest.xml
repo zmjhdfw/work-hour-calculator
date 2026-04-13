@@ -24,6 +24,16 @@
             android:name=".AddRecordActivity"
             android:label="添加记录"
             android:theme="@style/Theme.WorkHourCalculator" />
+        
+        <activity
+            android:name=".ClockInActivity"
+            android:label="打卡"
+            android:theme="@style/Theme.WorkHourCalculator" />
+        
+        <activity
+            android:name=".CalendarActivity"
+            android:label="日历"
+            android:theme="@style/Theme.WorkHourCalculator" />
             
         <activity
             android:name=".ViewRecordsActivity"

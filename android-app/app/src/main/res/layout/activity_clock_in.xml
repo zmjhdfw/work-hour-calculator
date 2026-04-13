@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+    
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="今日未打卡"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="16dp"/>
+    
+    <TextView
+        android:id="@+id/tvClockInTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="上班打卡: --:--"
+        android:textSize="16sp"
+        android:padding="8dp"/>
+    
+    <TextView
+        android:id="@+id/tvClockOutTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="下班打卡: --:--"
+        android:textSize="16sp"
+        android:padding="8dp"/>
+    
+    <TextView
+        android:id="@+id/tvWorkHours"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="工作时长: --"
+        android:textSize="16sp"
+        android:padding="8dp"/>
+    
+    <Button
+        android:id="@+id/btnClockIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="上班打卡"
+        android:layout_marginTop="16dp"/>
+    
+    <Button
+        android:id="@+id/btnClockOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="下班打卡"
+        android:enabled="false"
+        android:layout_marginTop="8dp"/>
+
+</LinearLayout>
