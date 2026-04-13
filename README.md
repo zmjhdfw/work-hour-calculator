@@ -6,8 +6,8 @@
 
 ### 方式1：直接下载可执行文件（推荐）
 
-- **Windows EXE**: [下载 工时计算器.exe](dist/工时计算器.exe) (8 MB)
-- **Android APK**: [下载 工时计算器.apk](dist/工时计算器.apk) (5.3 MB)
+- **Windows EXE**: [下载 工时计算器.exe](dist/工时计算器.exe) (10 MB)
+- **Android APK**: [下载 工时计算器.apk](dist/工时计算器.apk) (6.5 MB)
 
 无需安装，直接运行即可！
 
@@ -24,6 +24,7 @@ cd work-hour-calculator
 
 ## ✨ 功能特性
 
+### 核心功能
 - ✅ 添加、查看、编辑、删除工时记录
 - ✅ 按日期、日期范围、项目查询记录
 - ✅ 计算工时统计（总工时、正常工时、加班工时）
@@ -32,14 +33,25 @@ cd work-hour-calculator
 - ✅ 支持中文界面
 - ✅ 多平台支持
 
+### Android专属功能
+- ✅ **打卡功能** - 快速上下班打卡，自动计算工时
+- ✅ **日历视图** - 月历显示，可视化工时分布
+- ✅ 数据持久化（SQLite）
+- ✅ Material Design界面
+
+### Windows专属功能
+- ✅ GUI图形界面（tkinter）
+- ✅ 标签页设计
+- ✅ 中文完美支持
+
 ## 📱 支持平台
 
 | 平台 | 文件 | 大小 | 说明 |
 |------|------|------|------|
-| **Windows** | `工时计算器.exe` | 8 MB | 双击运行，无需安装 |
-| **Android** | `工时计算器.apk` | 5.3 MB | 安装即用，Java原生开发 |
+| **Windows** | `工时计算器.exe` | 10 MB | GUI界面，双击运行 |
+| **Android** | `工时计算器.apk` | 6.5 MB | 打卡、日历、统计 |
 | **Web** | `web_app.py` | - | Flask Web应用 |
-| **CLI** | `main.py` | - | 命令行界面 |
+| **CLI** | `main_cli.py` | - | 命令行界面 |
 
 ## 🚀 使用方式
 
@@ -47,7 +59,10 @@ cd work-hour-calculator
 
 1. 下载 `dist/工时计算器.exe`
 2. 双击运行
-3. 开始使用！
+3. 使用GUI界面：
+   - **添加记录页**：填写日期、时间、项目信息
+   - **查看记录页**：查看所有工时记录
+   - **统计分析页**：查看统计数据
 
 ### Android用户
 
@@ -55,6 +70,12 @@ cd work-hour-calculator
 2. 传输到手机
 3. 允许安装未知来源应用
 4. 安装并打开
+5. 使用功能：
+   - **添加记录**：手动添加工时记录
+   - **打卡**：快速上下班打卡
+   - **日历**：查看月历和工时分布
+   - **查看记录**：查看所有记录
+   - **统计分析**：查看统计数据
 
 ### Web应用
 
@@ -75,7 +96,7 @@ python web_app.py
 pip install -r requirements.txt
 
 # 运行
-python main.py
+python main_cli.py
 ```
 
 ## 📁 项目结构
@@ -83,18 +104,20 @@ python main.py
 ```
 work-hour-calculator/
 ├── dist/                          # 可执行文件
-│   ├── 工时计算器.exe            # Windows可执行文件
+│   ├── 工时计算器.exe            # Windows GUI应用
 │   └── 工时计算器.apk            # Android应用
 ├── android-app/                   # Android项目（Java）
 │   ├── app/src/main/java/
 │   │   └── org/workhour/calculator/
-│   │       ├── MainActivity.java
-│   │       ├── AddRecordActivity.java
-│   │       ├── ViewRecordsActivity.java
-│   │       ├── StatisticsActivity.java
-│   │       ├── WorkRecord.java
-│   │       ├── DataManager.java
-│   │       └── Statistics.java
+│   │       ├── MainActivity.java          # 主界面
+│   │       ├── AddRecordActivity.java     # 添加记录
+│   │       ├── ClockInActivity.java       # 打卡功能
+│   │       ├── CalendarActivity.java      # 日历功能
+│   │       ├── ViewRecordsActivity.java   # 查看记录
+│   │       ├── StatisticsActivity.java    # 统计分析
+│   │       ├── WorkRecord.java            # 数据模型
+│   │       ├── DataManager.java           # 数据管理
+│   │       └── Statistics.java            # 统计模型
 │   └── README.md
 ├── work_hour_calculator/          # Python核心模块
 │   ├── models.py
@@ -102,34 +125,26 @@ work-hour-calculator/
 │   ├── work_calculator.py
 │   └── report_generator.py
 ├── templates/                     # Web模板
-├── main.py                        # CLI入口
+├── main_gui.py                    # Windows GUI入口
+├── main_cli.py                    # CLI入口
 ├── web_app.py                     # Web应用
 └── README.md
 ```
 
-## 📖 使用说明
+## 🎨 界面预览
 
 ### Android应用
+- **主界面**：6个功能按钮
+- **打卡界面**：上班/下班打卡，显示工作时长
+- **日历界面**：月历视图，绿色标记有工时的日期
+- **添加记录**：日期、时间、项目输入
+- **查看记录**：列表显示所有记录
+- **统计分析**：总工时、平均工时统计
 
-1. **添加记录**：点击"添加记录"按钮，填写日期、时间、项目等信息
-2. **查看记录**：点击"查看记录"查看所有工时记录
-3. **统计分析**：点击"统计分析"查看总工时、平均工时等
-4. **清空数据**：点击"清空数据"删除所有记录
-
-### Windows/CLI应用
-
-程序启动后，会显示主菜单：
-
-```
-1. 添加工时记录
-2. 查看工时记录
-3. 编辑工时记录
-4. 删除工时记录
-5. 计算工时统计
-6. 生成统计报告
-7. 导出数据
-0. 退出程序
-```
+### Windows应用
+- **标签页设计**：添加记录、查看记录、统计分析
+- **GUI界面**：tkinter图形界面
+- **中文支持**：完美显示
 
 ## 🔧 开发
 
@@ -149,19 +164,35 @@ cd android-app
 python -m pytest work_hour_calculator/tests/
 
 # 打包Windows EXE
-pyinstaller --onefile --windowed --name=工时计算器 main.py
+pyinstaller --onefile --windowed --name=工时计算器 main_gui.py
 ```
 
 ## 📊 技术栈
 
 - **Android**: Java, SQLite, Material Design
-- **Python**: Python 3.10+, Flask
+- **Windows**: Python 3.10+, tkinter
+- **Web**: Flask
 - **打包**: PyInstaller (Windows), Gradle (Android)
 
 ## 📝 数据存储
 
 - **Android**: SQLite数据库
-- **Python**: JSON文件 (`work_records.json`)
+- **Windows/CLI**: JSON文件 (`work_records.json`)
+
+## 🔄 更新历史
+
+### v1.1 (2026-04-13)
+- ✅ Android添加打卡功能
+- ✅ Android添加日历视图
+- ✅ Windows GUI版本
+- ✅ 自定义时钟图标
+
+### v1.0 (2026-04-13)
+- ✅ 初始发布
+- ✅ Windows EXE版本
+- ✅ Android APK版本
+- ✅ 完整的工时计算功能
+- ✅ 数据持久化存储
 
 ## 📄 许可证
 
@@ -177,4 +208,4 @@ https://github.com/zmjhdfw/work-hour-calculator
 
 ---
 
-**多平台支持，开箱即用！**
+**多平台支持，功能丰富，开箱即用！**
